@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo1-api
+  labels:
+    app: demo1-api
+  namespace: demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo1-api
+  template:
+    metadata:
+      labels:
+        app: demo1-api
+    spec:
+      containers:
+      - image: 504301552141.dkr.ecr.ap-northeast-2.amazonaws.com/demo-1:latest
+        imagePullPolicy: Always
+        name: demo1-api
+        ports:
+            - containerPort: 80
+              protocol: TCP
+        command: ["java","-jar","/server.jar"]
